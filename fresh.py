@@ -1,10 +1,15 @@
 import praw
 
-def search():
-  reddit = praw.Reddit(client_id='', 
-                       client_secret="",
+def authenticate():
+  sensitive_file = open("sensitive.txt", "r")
+  c_id = sensitive_file.readline().rstrip()
+  c_secret = sensitive_file.readline().rstrip()
+  reddit = praw.Reddit(client_id=c_id, 
+                       client_secret=c_secret,
                        user_agent='USERAGENT')
+  return reddit                     
 
+def search(reddit):
   artists_file = open("artists.txt", "r")
   for artist in artists_file:
     hasFresh = False
@@ -22,7 +27,7 @@ def search():
           hasFresh = True
 
 def main():
-  search()
+  search(authenticate())
 
 if __name__ == "__main__":
   main()
