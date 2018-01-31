@@ -15,16 +15,16 @@ def search(reddit):
     artists_file = open("artists.txt", "r")
     subreddit = reddit.subreddit('hiphopheads')
     for artist in artists_file:
-        hasFresh = False
+        has_fresh = False
         names = artist.split(' / ')
         for name in names:
             for submission in subreddit.search(name, time_filter="week"):
               title = submission.title
               if "[FRESH" in title:
-                  if not hasFresh:
+                  if not has_fresh:
                       print(names[0].upper().rstrip() + ":")
                   print("  * " + title)
-                  hasFresh = True
+                  has_fresh = True
 
 def main():
     search(authenticate())
