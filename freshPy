@@ -6,6 +6,7 @@ def authenticate():
     sensitive_file = open("sensitive.txt", "r")
     c_id = sensitive_file.readline().rstrip()
     c_secret = sensitive_file.readline().rstrip()
+    sensitive_file.close()
     reddit = praw.Reddit(client_id = c_id, 
                          client_secret = c_secret,
                          user_agent = 'USERAGENT')
