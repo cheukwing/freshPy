@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 
 import praw
+import os
 
 def authenticate():
-    sensitive_file = open("sensitive.txt", "r")
+    directory = os.path.dirname(__file__)
+    sensitive_file = open(os.path.join(directory, "sensitive.txt"), "r")
     c_id = sensitive_file.readline().rstrip()
     c_secret = sensitive_file.readline().rstrip()
     sensitive_file.close()
@@ -13,7 +15,8 @@ def authenticate():
     return reddit                     
 
 def search(reddit):
-    artists_file = open("artists.txt", "r")
+    directory = os.path.dirname(__file__)
+    artists_file = open(os.path.join(directory, "artists.txt"), "r")
     subreddit = reddit.subreddit('hiphopheads')
     for artist in artists_file:
         has_fresh = False
